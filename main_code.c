@@ -51,22 +51,13 @@ int main() {
 void print_gantt_chart(struct process proc[], int n) {
     int i, j, current_time=0, completion_time;
     printf(" ");
-    for(i=0; i<n; i++) {
-        for(j=0; j<proc[i].burst_time; j++) {
-            printf("--");
-        }
-        printf(" ");
-    }
+
     printf("\n|");
     for(i=0; i<n; i++) {
         completion_time = current_time + proc[i].burst_time;
-        for(j=0; j<proc[i].burst_time-1; j++) {
-            printf(" ");
-        }
-        printf("P%d", proc[i].pid);
-        for(j=0; j<proc[i].burst_time-1; j++) {
-            printf(" ");
-        }
+        for(j=0; j<proc[i].burst_time; j++) {
+            printf("P%d",proc[i].pid);
+       }
         printf("|");
         proc[i].waiting_time = current_time - proc[i].arrival_time;
         if(proc[i].waiting_time < 0) {
@@ -75,11 +66,4 @@ void print_gantt_chart(struct process proc[], int n) {
         current_time = completion_time;
     }
     printf("\n ");
-    for(i=0; i<n; i++) {
-        for(j=0; j<proc[i].burst_time; j++) {
-            printf("--");
-        }
-        printf(" ");
-    }
-    printf("\n");
 }
